@@ -1,0 +1,31 @@
+.button {
+  margin-top: 30px;
+  font-size: 20px;
+  font-family: "Roboto";
+  width: 100px;
+  height: 40px;
+  background-color: blue;
+  color: white;
+  border-radius: 8px;
+  border-width: 0px;
+}
+
+.button-adjust {
+  text-align: center;
+}
+
+.adjust-style {
+  text-align: center;
+  margin-top: 25px;
+}
+
+.set-manager {
+  font-size: 20px;
+  font-style: "Roboto";
+  font-weight: 500;
+}
+
+.input-ele {
+  width: 250px;
+  height: max-content;
+}

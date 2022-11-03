@@ -1,0 +1,78 @@
+.bg-container {
+  background-image: url("https://img.freepik.com/free-photo/abstract-luxury-clear-yellow-wall-well-use-as-backdrop-background-layout_1258-207.jpg?w=2000");
+  height: 100vh;
+  background-size: cover;
+}
+
+.button {
+  margin-top: 30px;
+  font-size: 20px;
+  font-family: "Roboto";
+  width: 100px;
+  height: 40px;
+  background-color: blue;
+  color: white;
+  border-radius: 8px;
+  border-width: 0px;
+  margin-top: 10px;
+}
+
+.button-adjust {
+  text-align: center;
+}
+
+.adjust-style {
+  text-align: center;
+  margin-top: 25px;
+}
+
+.set-manager {
+  font-size: 20px;
+  font-style: "Roboto";
+  font-weight: 500;
+}
+
+.input-ele {
+  width: 250px;
+  height: max-content;
+}
+
+.card {
+  background-image: url("https://img.freepik.com/free-photo/warm-save-wallpaper-dark-texture_1258-284.jpg?w=2000");
+  text-align: center;
+  margin: 45px;
+  padding: 50px;
+  margin-left: 15px;
+  background-size: cover;
+  border-radius: 25px;
+}
+
+.card-1 {
+  background-color: #34ebc3;
+  border-radius: 13px;
+  margin-right: 20px;
+  padding: 20px;
+}
+
+.card-2 {
+  background-color: #34ebc3;
+  border-radius: 13px;
+  margin-left: 20px;
+  padding: 20px;
+}
+
+div {
+  margin-bottom: 10px;
+}
+
+label {
+  display: inline-block;
+  width: 150px;
+  text-align: right;
+  font-weight: bold;
+  color: blueviolet;
+}
+
+h1 {
+  margin-bottom: 25px;
+}

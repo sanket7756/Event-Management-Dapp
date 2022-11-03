@@ -1,0 +1,322 @@
+#main-card {
+  display: none;
+  text-align: center;
+}
+
+#withdraw {
+  display: none;
+  text-align: center;
+  margin-top: 30px;
+  font-size: 20px;
+  font-family: "Roboto";
+  width: 100px;
+  height: 40px;
+  background-color: blue;
+  color: white;
+  border-radius: 8px;
+  border-width: 0px;
+}
+
+#login {
+  display: none;
+  text-align: center;
+  margin-top: 30px;
+  font-size: 20px;
+  font-family: "Roboto";
+  width: 100px;
+  height: 40px;
+  background-color: blue;
+  color: white;
+  border-radius: 8px;
+  border-width: 0px;
+}
+
+#adminBalanceContainer {
+  padding-top: 100px;
+  padding-left: 300px;
+}
+
+#loginManagerButton {
+  display: none;
+  text-align: center;
+  margin-left: 380px;
+  margin-top: 10px;
+  font-size: 20px;
+  font-family: "Roboto";
+  width: 100px;
+  height: 40px;
+  background-color: blue;
+  color: white;
+  border-radius: 8px;
+  border-width: 0px;
+}
+
+.loginButton {
+  margin-left: 300px;
+  margin-top: 50px;
+}
+
+.loginCard {
+  margin-left: 100px;
+  margin-top: 50px;
+}
+
+.button {
+  margin-top: 30px;
+  font-size: 20px;
+  font-family: "Roboto";
+  width: 100px;
+  height: 40px;
+  background-color: blue;
+  color: white;
+  border-radius: 8px;
+  border-width: 0px;
+}
+
+.button-adjust {
+  text-align: center;
+}
+
+.adjust-style {
+  text-align: center;
+  margin-top: 25px;
+}
+
+.set-manager {
+  font-size: 20px;
+  font-style: "Roboto";
+  font-weight: 500;
+}
+
+.input-ele {
+  width: 250px;
+  height: max-content;
+}
+
+.card {
+  width: 200px;
+  height: 200px;
+  background-color: red;
+}
+
+.card1 {
+  padding: 1rem;
+  border: 1px solid black;
+  margin: 1rem;
+}
+
+/* Create Event Part CSS */
+.button {
+  margin-top: 30px;
+  font-size: 20px;
+  font-family: "Roboto";
+  width: 100px;
+  height: 40px;
+  background-color: blue;
+  color: white;
+  border-radius: 8px;
+  border-width: 0px;
+  margin-top: 10px;
+}
+
+#createEventButtonMain {
+  background-color: red; /* Green */
+  border-radius: 4px;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 12px;
+}
+
+#createTicketButtonMain {
+  background-color: red; /* Green */
+  border-radius: 4px;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 12px;
+}
+
+.createEventButton {
+  text-align: center;
+}
+
+.createTicketButton {
+  text-align: center;
+}
+
+.button-adjust {
+  text-align: center;
+}
+
+.adjust-style {
+  text-align: center;
+  margin-top: 25px;
+}
+
+.set-manager {
+  font-size: 20px;
+  font-style: "Roboto";
+  font-weight: 500;
+}
+
+.input-ele {
+  width: 250px;
+  height: max-content;
+}
+
+.card {
+  background-image: url("https://img.freepik.com/free-photo/warm-save-wallpaper-dark-texture_1258-284.jpg?w=2000");
+  text-align: center;
+  margin: 45px;
+  padding: 50px;
+  margin-left: 15px;
+  background-size: cover;
+  border-radius: 25px;
+}
+
+.card-1 {
+  background-color: #34ebc3;
+  border-radius: 13px;
+  margin-right: 20px;
+  padding: 20px;
+  display: none;
+}
+
+div {
+  margin-bottom: 10px;
+}
+
+.eventTextPart {
+  display: inline-block;
+  width: 150px;
+  text-align: right;
+  font-weight: bold;
+  color: blueviolet;
+}
+
+h1 {
+  margin-bottom: 25px;
+}
+
+/* Create Event Part CSS Ends */
+
+/* Create Ticket Part CSS  Start*/
+
+.card-2 {
+  background-color: #34ebc3;
+  border-radius: 13px;
+  margin-left: 20px;
+  padding: 20px;
+  display: none;
+}
+
+/* Create Ticket Part CSS Ends */
+
+/* All Events Part CSS */
+
+.AllEventsCard {
+  margin-left: 300px;
+  margin-top: 50px;
+}
+
+#eventButton {
+  display: none;
+}
+
+h5 {
+  text-decoration: underline;
+  text-align: center;
+}
+
+/* getting cards side by side part */
+
+* {
+  box-sizing: border-box;
+  /* margin: 0;
+  padding: 0; */
+  /* border: 0; */
+  /* outline: 0; */
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Float four columns side by side */
+.column {
+  float: left;
+  width: 100vh;
+  padding: 0 10px;
+  top: 0;
+  /* display: flex;
+  flex-direction: row; */
+  justify-content: center;
+  clear: both;
+  /* width: 100vh; */
+  /* padding-top: -500px; */
+  position: relative;
+  top: -200px;
+}
+
+/* Remove extra left and right margins, due to padding */
+.row {
+  margin: 0 -5px;
+  padding-right: 10px;
+  /* display: inline-block; */
+  padding: 10px;
+  right: 10px;
+  top: 10px;
+  flex: 1;
+  width: 100vh;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Responsive columns */
+@media screen and (max-width: 600px) {
+  .column {
+    width: 100%;
+    display: block;
+    margin-bottom: 20px;
+  }
+}
+
+/* Style the counter cards */
+.event-card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  padding: 16px;
+  text-align: center;
+  background-color: #f1f1f1;
+}
+
+#exampleModal {
+  display: none;
+}
+
+/* Card Element CSS */
+
+#purchaseModal {
+  display: none;
+}
+
+/* Admin Balance Button */
+#balanceButtonElement {
+  display: none;
+}
+
+#adminBalanceText {
+  display: none;
+  color: black;
+}
