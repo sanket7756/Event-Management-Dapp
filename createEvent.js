@@ -1,18 +1,25 @@
 import { abi, contractAddress } from "./frontEnd/ABIAndAddress.js";
 import { BigNumber, ethers } from "./frontEnd/ethers-5.6.esm.min.js";
 import eventmanagementController from "./frontEnd/controllers/EventManagementController.js";
+// import Web3 from "web3";
 
 const adminBalanceElement = document.getElementById("adminBalance");
 
 let isEventIdSameAsBlockchain = false;
 
 let viewEvents = true;
+let web3;
+
+let isEventCreated = false;
+
+let isTicketCreated = false;
 
 // Main Top Part
 let mainEventPageElement = document.getElementById("mainEventPage");
 
 // Admin Elements
 let adminLoginPartAnchorElement = document.getElementById("adminloginPart");
+
 let adminSetManagerPartAnchorElement = document.getElementById(
   "adminSetManagerPart"
 );
@@ -164,10 +171,6 @@ async function connect() {
   } else {
     adminLoginHTMLButtonElement.innerHTML = "Please install MetaMask";
   }
-
-  // $(document).on("click", function () {
-  //   allEventsDisplayCardElement.remove();
-  // });
 }
 
 function loginDisplay() {
@@ -233,15 +236,22 @@ async function getAdminBalance() {
   userPurchasedTicketsContainerElement.style.display = "none";
   withdrawButtonElement.style.display = "none";
 
-  if (typeof window.ethereum !== "undefined") {
-    await window.ethereum.request({ method: "eth_requestAccounts" });
-    // viewEventsClickedOnlyOnce = true;
-    // console.log(viewEventsClickedOnlyOnce);
-    let contractInstance =
-      await eventmanagementController.contractInteraction();
-    let adminBalance = await contractInstance.checkBalance();
-    adminBalanceSpanElement.innerHTML = adminBalance / 10 ** 18 + ` ETH`;
-  }
+  // web3 = new Web3(ethereum);
+  // let contractInstance = new web3.eth.Contract(abi, contractAddress);
+  // console.log(contractInstance);
+  // let account = await web3.eth.getAccounts();
+  // let adminBalance = await contractInstance.methods.checkBalance().call();
+  // console.log(adminBalance);
+
+  let contractInstance = await eventmanagementController.contractInteraction();
+  let adminBalance = await contractInstance.checkBalance();
+  const provider = new ethers.providers.Web3Provider(window.ethereum);
+  console.log(provider);
+  const accounts = await provider.listAccounts();
+  const account = accounts[0];
+  console.log(account);
+
+  adminBalanceSpanElement.innerHTML = adminBalance / 10 ** 18 + ` ETH`;
   allEventsDisplayCardElement.style.display = "none";
 }
 
@@ -305,17 +315,16 @@ async function createEventFunc() {
   const generateTicketIdValue = createEventGenerateTicketIdField.value;
   const maxLimitToBuyTicketsValue = createEventMaxLimitToBuyTicketsField.value;
 
+  // console.log(createEventFromBlockchain);
+
   if (typeof window.ethereum !== "undefined") {
     const accounts = await ethereum.request({ method: "eth_requestAccounts" });
     const account = accounts[0];
 
-    // viewEventsClickedOnlyOnce = true;
-    // console.log(viewEventsClickedOnlyOnce);
-
     let contractInstance =
       await eventmanagementController.contractInteraction();
 
-    await contractInstance.createEvent(
+    let createdEvent = await contractInstance.createEvent(
       eventNameValue,
       eventIdValue,
       saleStartDateValue,
@@ -323,6 +332,12 @@ async function createEventFunc() {
       generateTicketIdValue,
       maxLimitToBuyTicketsValue
     );
+
+    let transactionStatus = createdEvent.v;
+
+    if (transactionStatus == 1) {
+      isEventCreated = true;
+    }
 
     let saleStartDateValueInMilliseconds = saleStartDateValue * 1000;
     let saleEndDateValueInMillisecond = saleEndDateValue * 1000;
@@ -367,7 +382,7 @@ async function createTicketFunc() {
   const ticketPriceValue = managerCreateEventTicketPriceElement.value;
   const totalTicketsValue = managerCreateEventTotalTicketsElement.value;
 
-  if (typeof window.ethereum !== "undefined") {
+  if (typeof window.ethereum !== "undefined" && isEventCreated == true) {
     const accounts = await ethereum.request({
       method: "eth_requestAccounts",
     });
@@ -393,6 +408,12 @@ async function createTicketFunc() {
       // ethers.utils.parseUnits(ticketPriceValue, decimals),
       totalTicketsValue
     );
+
+    let createdTicketTransactionStatus = createdTicketInfo.v;
+
+    if (createdTicketTransactionStatus == 1) {
+      isTicketCreated = true;
+    }
 
     let checkingTicketInfo = await contractInstance.eventIdToTicketInfo(
       createTicketEventValue
@@ -481,126 +502,6 @@ async function displayEvents() {
       `;
     allEventsDisplayCardElement.innerHTML += content;
   });
-
-  adminLoginPartAnchorElement.onclick = remove1;
-  adminSetManagerPartAnchorElement.onclick = remove2;
-  adminBalancePartAnchorElement.onclick = remove3;
-  adminWithdrawPartElement.onclick = remove4;
-  managerLoginHTMLAnchorElement.onclick = remove5;
-  createEventHTMLAnchorElement.onclick = remove6;
-  createTicketHTMLAnchorElement.onclick = remove7;
-
-  function remove1() {
-    adminLoginHTMLButtonElement.style.display = "block";
-
-    for (let i = 0; i < eventDataArrayLength; i++) {
-      let numToStr = i.toString();
-
-      // console.log(numToStr);
-
-      const element = document.getElementById(numToStr);
-
-      // console.log(element);
-
-      element.remove();
-    }
-  }
-
-  function remove2() {
-    adminSetManagerHTMLContainerElement.style.display = "block";
-
-    for (let i = 0; i < eventDataArrayLength; i++) {
-      let numToStr = i.toString();
-
-      // console.log(numToStr);
-
-      const element = document.getElementById(numToStr);
-
-      // console.log(element);
-
-      element.remove();
-    }
-  }
-
-  function remove3() {
-    adminBalanceParaElement.style.display = "block";
-
-    for (let i = 0; i < eventDataArrayLength; i++) {
-      let numToStr = i.toString();
-
-      // console.log(numToStr);
-
-      const element = document.getElementById(numToStr);
-
-      // console.log(element);
-
-      element.remove();
-    }
-  }
-
-  function remove4() {
-    withdrawButtonElement.style.display = "block";
-
-    for (let i = 0; i < eventDataArrayLength; i++) {
-      let numToStr = i.toString();
-
-      // console.log(numToStr);
-
-      const element = document.getElementById(numToStr);
-
-      // console.log(element);
-
-      element.remove();
-    }
-  }
-
-  function remove5() {
-    managerLoginButtonElement.style.display = "block";
-
-    for (let i = 0; i < eventDataArrayLength; i++) {
-      let numToStr = i.toString();
-
-      // console.log(numToStr);
-
-      const element = document.getElementById(numToStr);
-
-      // console.log(element);
-
-      element.remove();
-    }
-  }
-
-  function remove6() {
-    createEventHTMLCardElement.style.display = "block";
-
-    for (let i = 0; i < eventDataArrayLength; i++) {
-      let numToStr = i.toString();
-
-      // console.log(numToStr);
-
-      const element = document.getElementById(numToStr);
-
-      // console.log(element);
-
-      element.remove();
-    }
-  }
-
-  function remove7() {
-    createTicketHTMLCardElement.style.display = "block";
-
-    for (let i = 0; i < eventDataArrayLength; i++) {
-      let numToStr = i.toString();
-
-      // console.log(numToStr);
-
-      const element = document.getElementById(numToStr);
-
-      // console.log(element);
-
-      element.remove();
-    }
-  }
 }
 
 window.userPurchaseFunc = async () => {
@@ -692,6 +593,8 @@ async function userPurchasedTicketsFunc() {
   userPurchasedTicketsContainerElement.style.display = "block";
   withdrawButtonElement.style.display = "none";
 
+  let adminLoginPartAnchorEle = document.getElementById("adminSetManagerPart");
+
   if (typeof window.ethereum !== "undefined") {
     await window.ethereum.request({ method: "eth_requestAccounts" });
     let contractInstance =
@@ -704,7 +607,7 @@ async function userPurchasedTicketsFunc() {
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const accounts = await provider.listAccounts();
     let account = accounts[0];
-    console.log(account);
+    // console.log(account);
 
     let totalPurchasedTicketsStructLength =
       totalPurchasedTicketsStructArrayFromBlockChain.length;
@@ -712,26 +615,26 @@ async function userPurchasedTicketsFunc() {
       await contractInstance.EventDataArrayReturn();
     console.log(eventDataArrayFromBlockchain);
 
-    for (let i = 0; i < totalPurchasedTicketsStructLength; i++) {
-      if (
-        account === totalPurchasedTicketsStructArrayFromBlockChain[i].calledUser
-      ) {
-        // console.log("is this part working");
-        // console.log(eventDataArrayFromBlockchain[i]);
-        let content = `
+    totalPurchasedTicketsStructArrayFromBlockChain.forEach(
+      async (singlePurchasedTicket, idx) => {
+        let stringId = idx.toString();
+        if (singlePurchasedTicket.calledUser == account) {
+          // console.log(singlePurchasedTicket.calledUser);
+          // console.log(idx);
+          let content = `
         <div class="row">
           <div class="column">
-            <div class="event-card">
-              <p>Event Id: ${eventDataArrayFromBlockchain[i].eventId}</p>
-              <p>Event Name: ${eventDataArrayFromBlockchain[i].eventName}</p>
+            <div class="event-card" id=${stringId}>
+              <p>Event Id: ${singlePurchasedTicket.eventId}</p>
               <p>User Address: ${account}</p>
-              <p>Ticket Id: ${totalPurchasedTicketsStructArrayFromBlockChain[i].totalPurchasedTicket}</p>
+              <p>Ticket Id: ${singlePurchasedTicket.totalPurchasedTicket}</p>
             </div>
           </div>
         </div>
         `;
-        userPurchasedTicketsContainerElement.innerHTML += content;
+          userPurchasedTicketsContainerElement.innerHTML += content;
+        }
       }
-    }
+    );
   }
 }
